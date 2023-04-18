@@ -1,59 +1,35 @@
 import { tab } from "./tab";
 export {locationTab};
-/**
- * license of the map:
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
 
 const content = document.querySelector("#content");
 
 function locationTab(){
     tab()
 
-    //include map api
-    const script = document.createElement('script');
-    script.setAttribute('src', 
-    "https://maps.googleapis.com/maps/api/js?key=YOUR-API-KEY&callback=initMap&v=weekly");
-    script.setAttribute("defer", true);
-    script.setAttribute('type', 'text/javascript');
-    document.getElementsByTagName('body')[0].appendChild(script);
-
     //create elements
     const container = document.createElement('div');
     const h1 = document.createElement('h1');
     const h2 = document.createElement('h2');
     const h3 = document.createElement('h3');
-    const map = document.createElement('div');
-    
+    const map = document.createElement('iframe');
+
     // add classes, attributes and style
     container.classList.add("main-container", "main");
-    map.className = "map";
-    map.setAttribute('id', 'map');
     h1.style.textShadow = "none"
     container.style.minHeight = "86vh"
-    
+    map.className = "map";
+    //map iframe attributes
+    map.setAttribute("src", `https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6568.005110084107!2d-58.3837353!3d-34.6040969!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4aa9f0a6da5edb%3A0x11bead4e234e558b!2sObelisco!5e0!3m2!1ses!2sar!4v1681854815161!5m2!1ses!2sar`);
+    map.setAttribute('width', '600px');
+    map.setAttribute('height', '450px');
+    map.setAttribute('allowfullscreen', '');
+    map.setAttribute('loading', 'lazy');
+    map.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+
     //add content
     h1.textContent = "Welcome to Carpincho Restaurant";
     h2.textContent = "Here is our establishment:";
     h3.textContent = "Fictional Direction 1994";
-    // Initialize and add the map
-    function initMap() {
-        // The location of Uluru
-        const uluru = { lat: -25.344, lng: 131.031 };
-        // The map, centered at Uluru
-        const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
-        center: uluru,
-        });
-        // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-        position: uluru,
-        map: map,
-        });
-    }
-    window.initMap = initMap;
 
     //append all
     content.appendChild(container);
